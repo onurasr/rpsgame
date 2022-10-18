@@ -1,67 +1,67 @@
 import 'dart:io';
 import 'dart:math';
 
-enum Hareket {tas, kagit, makas}
+enum Move {rock, paper, scissors}
 
 void main() {
   while (true) {
-    stdout.write("Taş, Kağıt, Makas Oyununa Hoşgeldiniz! // Taş için(t), Kağıt için(k), Makas için(m), Çıkmak için(q) Giriniz ----------------->");
+    stdout.write("Welcome to Rock, Paper, Scissors Game! // for Rock(r), for Paper(,p), for Scissors(s), for Quit(q) Enter ----------------->");
     final input = stdin.readLineSync();
 
-    //Oyuncu Hareketleri
-    var oyuncuHareket;
-    var oyuncuHareketisim;
+    //Player Move
+    var playerMove;
+    var playerMovename;
 
-    if (input == 't') {
-      oyuncuHareket = Hareket.tas;
-      oyuncuHareketisim = "Taş";
+    if (input == 'r') {
+      playerMove = Move.rock;
+      playerMovename = "Rock";
     }
-    else if (input == 'k') {
-      oyuncuHareket = Hareket.kagit;
-      oyuncuHareketisim = "Kağıt";
+    else if (input == 'p') {
+      playerMove = Move.paper;
+      playerMovename = "Paper";
     }
-    else if (input == 'm') {
-      oyuncuHareket = Hareket.makas;
-      oyuncuHareketisim = "Makas";
+    else if (input == 's') {
+      playerMove = Move.scissors;
+      playerMovename = "Scissors";
     }
     else if (input == 'q') {
       break;
     }
     else{
-      print("Geçersiz giriş. Tekrar deneyiniz.");
+      print("Invalid input. Please try again.");
       return main() ;
     }
 
-    //Bilgisayar Hareketleri
-    final randomSayi = Random().nextInt(3);
-    final pcHareket = Hareket.values[randomSayi];
-    var pcHareketisim;
+    //Pc Move
+    final randomNumber = Random().nextInt(3);
+    final pcMove = Move.values[randomNumber];
+    var pcMovename;
 
-    if (randomSayi == 0) {
-      pcHareketisim = "Taş";
+    if (randomNumber == 0) {
+      pcMovename = "Rock";
     }
-    else if (randomSayi == 1) {
-      pcHareketisim = "Kağıt";
+    else if (randomNumber == 1) {
+      pcMovename = "Paper";
     }
-    else if (randomSayi == 2) {
-      pcHareketisim = "Makas";
+    else if (randomNumber == 2) {
+      pcMovename = "Scissors";
     }
 
-    //Ekranda Gösterim
-    print("Senin Hareketin: $oyuncuHareketisim");
-    print("Bilgisayarın Hareketi: $pcHareketisim");
+    //Show Screen
+    print("Your Move: $playerMovename");
+    print("PC Move: $pcMovename");
 
-    //Oyun Mantığı
-    if (oyuncuHareket == Hareket.tas && pcHareket == Hareket.makas ||
-        oyuncuHareket == Hareket.kagit && pcHareket == Hareket.tas ||
-        oyuncuHareket == Hareket.makas && pcHareket == Hareket.kagit) {
-      print("Sen Kazandın!");
+    //Game Logic
+    if (playerMove == Move.rock && pcMove == Move.scissors ||
+        playerMove == Move.paper && pcMove == Move.rock ||
+        playerMove == Move.scissors && pcMove == Move.paper) {
+      print("You won!");
     }
-    else if (oyuncuHareket == pcHareket) {
-      print("Berabere!");
+    else if (playerMove == pcMove) {
+      print("Draw!");
     }
     else {
-      print("Bilgisayar Kazandı!");
+      print("Pc won!");
     }
 
 
